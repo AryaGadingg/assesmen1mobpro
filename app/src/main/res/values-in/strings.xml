@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Assesmen 1</string>
+    <string name="profilnama">Nama</string>
+    <string name="profilnim">NIM</string>
+    <string name="profilkelas">Kelas</string>
+    <string name="profiltentang">Tentang Aplikasi</string>
+    <string name="profiltujuan">Aplikasi ini dibuat dengan tujuan untuk memenuhi Assesmen 1 Mobpro</string>
+    <string name="btnGanti">Ganti Bahasa</string>
+    <string name="hitung">Hitung</string>
+    <string name="diskon_persen">Persentase Diskon (%)</string>
+    <string name="hitung_intro_diskon">Masukkan harga barang dan persentase diskon untuk menghitung diskon.</string>
+    <string name="harga_barang">Harga Barang</string>
+    <string name="reset">Reset</string>
+    <string name="total_bayar">Total Bayar: Rp %1$.2f</string>
+    <string name="jumlah_diskon">Jumlah Diskon: Rp %1$.2f</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="kembali">Kembali</string>
+</resources>
