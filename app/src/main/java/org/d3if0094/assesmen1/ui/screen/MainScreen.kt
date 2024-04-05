@@ -3,6 +3,7 @@ package org.d3if0094.assesmen1.ui.screen
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -17,6 +18,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -82,6 +84,7 @@ fun ScreenContent(modifier: Modifier) {
     var jumlahDiskon by rememberSaveable { mutableStateOf(0f) }
 
     var isResetVisible by remember { mutableStateOf(false) }
+    var selectedPercentage by remember { mutableStateOf(0f) }
 
     val context = LocalContext.current
 
@@ -110,6 +113,33 @@ fun ScreenContent(modifier: Modifier) {
             isError = diskonPersenError,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         )
+
+        // Menampilkan pilihan persen yang dapat diklik
+        // Di dalam komposisi Row yang menampilkan pilihan persen yang dapat diklik
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            listOf(10f, 20f, 50f, 80f).forEach { percentage ->
+                RadioButton(
+                    selected = selectedPercentage == percentage,
+                    onClick = {
+                        selectedPercentage = percentage
+                        diskonPersen = percentage.toInt().toString() // Mengubah tipe data menjadi Int dan menghilangkan desimal
+                    }
+                )
+                Text(
+                    text = "${percentage.toInt()}%", // Mengubah format menjadi tanpa desimal
+                    modifier = Modifier.clickable {
+                        selectedPercentage = percentage
+                        diskonPersen = percentage.toInt().toString() // Mengubah tipe data menjadi Int dan menghilangkan desimal
+                    }
+                )
+            }
+        }
+
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
@@ -150,9 +180,7 @@ fun ScreenContent(modifier: Modifier) {
             ) {
                 Text(text = stringResource(R.string.hitung))
             }
-
         }
-
 
         if (totalBayar != 0f && jumlahDiskon != 0f) {
             Divider()
@@ -174,6 +202,7 @@ fun ScreenContent(modifier: Modifier) {
         }
     }
 }
+
 
 private fun hitungTotalBayar(hargaBarang: Float, diskonPersen: Float): Float {
     val diskon = hargaBarang * (diskonPersen / 100)
